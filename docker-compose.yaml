@@ -1,0 +1,27 @@
+version: "3.6"
+services:
+###
+  bind:
+    image: sameersbn/bind:latest
+    restart: unless-stopped
+    container_name: bind
+    volumes:
+      - /etc/docker/bind:/data
+    ports:
+      - "53:53"
+      - "10000:10000"
+    networks:
+      management:
+        ipv4_address: 10.1.111.10
+###
+networks:
+  default:
+  management:
+    driver: ipvlan
+    driver_opts:
+      parent: vlan111
+    ipam:
+      config:
+        - subnet: 10.1.111.0/24
+          gateway: 10.1.111.254
+

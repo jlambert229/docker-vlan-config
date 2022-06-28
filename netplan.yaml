@@ -1,0 +1,21 @@
+#cloud-config
+local-hostname: ${hostname}
+instance-id: ${hostname}
+network:
+  ethernets:
+    ens192:
+      addresses: 
+        - ${ip_address}/${netmask}
+      gateway4: ${gateway}
+      nameservers:
+        addresses: ${nameservers}
+    ens224:
+      addresses: 
+        - "10.1.111.71/24" # - example address
+  vlans:
+    vlan${vlan_id}:
+      id: ${vlan_id}
+      link: ${vlan_link}
+  version: 2
+
+
